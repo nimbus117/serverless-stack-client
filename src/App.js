@@ -6,7 +6,7 @@ import { Auth } from 'aws-amplify';
 import Routes from './Routes';
 import './App.css';
 
-function App(props) {
+function App({ history }) {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [isAuthenticating, setIsAuthenticating] = useState(true);
 
@@ -30,7 +30,7 @@ function App(props) {
   async function handleLogout() {
     await Auth.signOut();
     userHasAuthenticated(false);
-    props.history.push('/login');
+    history.push('/login');
   }
 
   return (
@@ -46,7 +46,12 @@ function App(props) {
           <Navbar.Collapse>
             <Nav pullRight>
               {isAuthenticated ? (
-                <NavItem onClick={handleLogout}>Logout</NavItem>
+                <>
+                  <LinkContainer to="/settings">
+                    <NavItem>Settings</NavItem>
+                  </LinkContainer>
+                  <NavItem onClick={handleLogout}>Logout</NavItem>
+                </>
               ) : (
                 <>
                   <LinkContainer to="/signup">

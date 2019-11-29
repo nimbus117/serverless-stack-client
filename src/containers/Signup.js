@@ -10,7 +10,7 @@ import LoaderButton from '../components/LoaderButton';
 import { useFormFields } from '../libs/hooksLib';
 import './Signup.css';
 
-export default function Signup(props) {
+export default function Signup({ history, userHasAuthenticated }) {
   const [fields, handleFieldChange] = useFormFields({
     email: '',
     password: '',
@@ -75,11 +75,11 @@ export default function Signup(props) {
     try {
       await Auth.confirmSignUp(fields.email, fields.confirmationCode);
       if (hasResentSignUp) {
-        props.history.push('/login');
+        history.push('/login');
       } else {
         await Auth.signIn(fields.email, fields.password);
-        props.userHasAuthenticated(true);
-        props.history.push('/');
+        userHasAuthenticated(true);
+        history.push('/');
       }
     } catch (e) {
       alert(e.message);
