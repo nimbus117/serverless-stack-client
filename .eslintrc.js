@@ -2,7 +2,7 @@ module.exports = {
   env: {
     browser: true,
     commonjs: true,
-    es6: true,
+    es6: true
   },
   extends: [
     'eslint:recommended',
@@ -26,7 +26,9 @@ module.exports = {
   plugins: ['prettier', 'react'],
   rules: {
     'prettier/prettier': 'warn',
-    'react/jsx-filename-extension': ['off']
+    'react/jsx-filename-extension': ['off'],
+    'react/jsx-props-no-spreading': ['off'],
+    'react/prop-types': ['off']
   },
   settings: {
     react: {
