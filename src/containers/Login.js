@@ -5,7 +5,7 @@ import LoaderButton from '../components/LoaderButton';
 import { useFormFields } from '../libs/hooksLib';
 import './Login.css';
 
-export default function Login({ history, userHasAuthenticated }) {
+export default function Login({ userHasAuthenticated }) {
   const [isLoading, setIsLoading] = useState(false);
   const [fields, handleFieldChange] = useFormFields({
     email: '',
@@ -24,7 +24,6 @@ export default function Login({ history, userHasAuthenticated }) {
     try {
       await Auth.signIn(fields.email, fields.password);
       userHasAuthenticated(true);
-      history.push('/');
     } catch (e) {
       alert(e.message);
       setIsLoading(false);
